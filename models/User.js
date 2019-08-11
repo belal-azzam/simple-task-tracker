@@ -13,6 +13,9 @@ module.exports = (sequalize, type) => {
         email:{
             type: type.STRING,
             allowNull: false,
+            validate:{
+                isEmail: true
+            }
         },
         password: {
             type: type.STRING,

@@ -17,5 +17,8 @@ sequelize.sync().then(() =>{
 });
 
 module.exports = {
-    User
+    User,
+    TaskType,
+    TaskStatus,
+    Task
 };

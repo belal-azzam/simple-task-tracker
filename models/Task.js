@@ -13,17 +13,14 @@ module.exports = (sequalize, type) => {
             type: type.TEXT,
             allowNull: false,
         },
-        photo:{
-            type: type.STRING,
-            allowNull: true,
-        },
+
         creator_id:{
             type: type.INTEGER,
             allowNull: false,
         },
         assigned_user_id:{
             type: type.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         status_id:{
             type: type.INTEGER,
@@ -35,15 +32,15 @@ module.exports = (sequalize, type) => {
         },
         task_id:{
             type: type.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         time_estimate:{
             type: type.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         actual_time:{
             type: type.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
     });
 };
