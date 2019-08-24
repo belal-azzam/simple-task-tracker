@@ -17,13 +17,14 @@ function getTaskTypes(request, response) {
 }
 
 function getStatusWithTasks(request, response) {
-    TaskStatus.hasMany(Task, {foreignKey: "status_id"});
     TaskStatus.findAll({include: [Task]}).then(taskStatuses => {
         TaskType.findAll().then(taskTypes => {
             return response.json({success: true, data: {task_statuses: taskStatuses, task_types: taskTypes}});
         })
     })
 }
+
+
 
 function create(request, response) {
     let {

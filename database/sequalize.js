@@ -12,7 +12,12 @@ const User = UserModel(sequelize, Sequelize);
 const TaskType = TaskTypeModel(sequelize, Sequelize);
 const TaskStatus = TaskStatusModel(sequelize, Sequelize);
 const Task = TaskModel(sequelize, Sequelize);
-sequelize.sync().then(() =>{
+TaskStatus.hasMany(Task, {foreignKey: "status_id"});
+TaskType.hasMany(Task, {foreignKey: 'type_id'});
+Task.belongsTo(User, {foreignKey: 'assigned_user_id', as: 'task_assigned_user'});
+Task.belongsTo(User, {foreignKey: 'creator_id', as: 'task_creator'});
+Task.belongsTo(Task, {foreignKey: 'task_id'});
+sequelize.sync({force: true}).then(() =>{
    console.log('database and tables created');
 });
 

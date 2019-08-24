@@ -6,7 +6,6 @@ const cors = require('cors');
 const passport = require('passport');
 const routes = require('./routes')
 
-
 const PORT = 4000;
 app.use(cors());
 // Bodyparser middleware
@@ -16,6 +15,8 @@ app.use(
     })
 );
 app.use(bodyParser.json());
+app.use(passport.initialize());
+require('./config/passport')(passport);
 // app.use(passport.initialize());
 // require('./config/passport')(passport);
 const record = {
