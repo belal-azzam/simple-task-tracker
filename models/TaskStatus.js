@@ -1,5 +1,5 @@
 module.exports = (sequalize, type) => {
-    return sequalize.define('task_status',{
+    var TaskStatus =  sequalize.define('task_status',{
         id:{
             type: type.INTEGER,
             autoIncrement: true,
@@ -11,4 +11,5 @@ module.exports = (sequalize, type) => {
         },
 
     });
+    return TaskStatus;
 };

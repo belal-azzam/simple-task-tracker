@@ -17,7 +17,7 @@ TaskType.hasMany(Task, {foreignKey: 'type_id'});
 Task.belongsTo(User, {foreignKey: 'assigned_user_id', as: 'task_assigned_user'});
 Task.belongsTo(User, {foreignKey: 'creator_id', as: 'task_creator'});
 Task.belongsTo(Task, {foreignKey: 'task_id'});
-sequelize.sync({force: true}).then(() =>{
+sequelize.sync({force: false}).then(() =>{
    console.log('database and tables created');
 });
 

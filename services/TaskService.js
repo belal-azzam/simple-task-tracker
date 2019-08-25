@@ -40,14 +40,11 @@ function create(request, response) {
     if (!title) {
         response.json({success: false, message: "Task must have a title"});
     }
-    creator_id  = 2;
-    if (!creator_id) {
-        response.json({success: false, message: 'Task must have a creator'});
-    }
+
     Task.create({
         title: title,
         description: description,
-        creator_id: creator_id,
+        creator_id: request.user.id,
         type_id: type_id,
         status_id: status_id,
         assigned_user_id: assigned_user_id,

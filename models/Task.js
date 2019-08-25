@@ -1,5 +1,5 @@
 module.exports = (sequalize, type) => {
-    return sequalize.define('task',{
+    var Task =  sequalize.define('task',{
         id:{
             type: type.INTEGER,
             autoIncrement: true,
@@ -52,4 +52,5 @@ module.exports = (sequalize, type) => {
             }
         },
     });
+    return Task;
 };

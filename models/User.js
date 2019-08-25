@@ -1,6 +1,6 @@
 
 module.exports = (sequalize, type) => {
-    return sequalize.define('user',{
+    var User = sequalize.define('user',{
         id:{
             type: type.INTEGER,
             autoIncrement: true,
@@ -50,4 +50,5 @@ module.exports = (sequalize, type) => {
                 },
             ]
         });
+    return User;
 };
