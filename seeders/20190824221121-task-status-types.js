@@ -5,12 +5,15 @@ module.exports = {
      queryInterface.bulkInsert('task_statuses', [
         {
         name: 'Todo',
+        display_order: 1,
         },
         {
         name: 'In Progress',
+        display_order: 2,
         },
         {
         name: 'Done',
+        display_order: 3,
         },
     ], {});
      return queryInterface.bulkInsert('task_types', [
@@ -37,6 +40,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
+      console.log('a8a');
        queryInterface.bulkDelete('task_statuses');
       return queryInterface.bulkDelete('task_types');
     /*

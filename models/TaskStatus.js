@@ -11,5 +11,8 @@ module.exports = (sequalize, type) => {
         },
 
     });
+    TaskStatus.associate = models => {
+        TaskStatus.hasMany(models.Task, {foreignKey: "status_id"});
+    }
     return TaskStatus;
 };

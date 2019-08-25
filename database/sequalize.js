@@ -8,22 +8,18 @@ const sequelize = new Sequelize(dbConfig.db_name, dbConfig.db_user, dbConfig.db_
     host: dbConfig.db_host,
     dialect: 'mariadb'
 });
-const User = UserModel(sequelize, Sequelize);
-const TaskType = TaskTypeModel(sequelize, Sequelize);
-const TaskStatus = TaskStatusModel(sequelize, Sequelize);
-const Task = TaskModel(sequelize, Sequelize);
-TaskStatus.hasMany(Task, {foreignKey: "status_id"});
-TaskType.hasMany(Task, {foreignKey: 'type_id'});
-Task.belongsTo(User, {foreignKey: 'assigned_user_id', as: 'task_assigned_user'});
-Task.belongsTo(User, {foreignKey: 'creator_id', as: 'task_creator'});
-Task.belongsTo(Task, {foreignKey: 'task_id'});
+var db = {};
+db.User = UserModel(sequelize, Sequelize);
+db.TaskType = TaskTypeModel(sequelize, Sequelize);
+db.TaskStatus = TaskStatusModel(sequelize, Sequelize);
+db.Task = TaskModel(sequelize, Sequelize);
 sequelize.sync({force: false}).then(() =>{
-   console.log('database and tables created');
+    Object.keys(db).forEach(function (model) {
+        if(db[model].hasOwnProperty('associate')){
+            db[model].associate(db);
+        }
+    })
+    
 });
 
-module.exports = {
-    User,
-    TaskType,
-    TaskStatus,
-    Task
-};
+module.exports = db;

@@ -10,5 +10,9 @@ module.exports = (sequalize, type) => {
             allowNull: false,
         },
     });
+
+    TaskType.associate = models => {
+        TaskType.hasMany(models.Task, {foreignKey: 'type_id'});
+    }
     return TaskType;
 };

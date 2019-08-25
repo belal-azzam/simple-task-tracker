@@ -51,6 +51,14 @@ module.exports = (sequalize, type) => {
                 isInt: {msg: 'Must be a number'}
             }
         },
+
     });
+
+    Task.associate = models => {
+        Task.belongsTo(models.User, {foreignKey: 'assigned_user_id', as: 'task_assigned_user'});
+        Task.belongsTo(models.User, {foreignKey: 'creator_id', as: 'task_creator'});
+        Task.belongsTo(models.Task, {foreignKey: 'task_id'});
+    }
+
     return Task;
 };

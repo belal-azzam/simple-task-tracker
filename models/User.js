@@ -50,5 +50,10 @@ module.exports = (sequalize, type) => {
                 },
             ]
         });
+    User.associate = models => {
+        User.hasMany(models.Task, {foreignKey: 'assigned_user_id', as: 'tasks_assigned_user'});
+        User.hasMany(models.Task, {foreignKey: 'creator_id', as: 'tasks_creator_user'});
+
+    }
     return User;
 };

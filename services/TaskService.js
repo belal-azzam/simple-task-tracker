@@ -17,7 +17,7 @@ function getTaskTypes(request, response) {
 }
 
 function getStatusWithTasks(request, response) {
-    TaskStatus.findAll({include: [Task]}).then(taskStatuses => {
+    TaskStatus.findAll({include: [Task], order: [['display_order', 'ASC']]}).then(taskStatuses => {
         TaskType.findAll().then(taskTypes => {
             return response.json({success: true, data: {task_statuses: taskStatuses, task_types: taskTypes}});
         })
