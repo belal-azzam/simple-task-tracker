@@ -30,16 +30,14 @@ function create(request, response) {
     let {
         title,
         description,
-        creator_id,
         type_id,
         status_id,
         assigned_user_id,
         time_estimate,
-        actual_time
+        actual_time,
+        task_id
     } = request.body;
-    if (!title) {
-        response.json({success: false, message: "Task must have a title"});
-    }
+
 
     Task.create({
         title: title,
@@ -49,11 +47,11 @@ function create(request, response) {
         status_id: status_id,
         assigned_user_id: assigned_user_id,
         time_estimate: time_estimate,
-        actual_time: actual_time
+        actual_time: actual_time,
+        task_id: task_id
     }).then((task) => {
         return response.status(200).json(task);
     }).catch(e => {
-        console.log(e);
         return response.status(400).json({message: 'invalid data'});
     })
 }
@@ -64,40 +62,34 @@ function update(request, response) {
     {
         return response.status(404).json({message: 'Task not found!'});
     }
-    console.log(request.params.taskId);
 
     let {
         title,
         description,
-        creator_id,
         type_id,
         status_id,
         assigned_user_id,
         time_estimate,
-        actual_time
+        actual_time,
+        task_id
     } = request.body;
-    creator_id  = 2;
-    if (!title) {
-        response.json({success: false, message: "Task must have a title"});
-    }
-    if (!creator_id) {
-        response.json({success: false, message: 'Task must have a creator'});
-    }
+
+
     Task.findByPk(request.params.taskId)
         .then((task) => {
             task.update({
                 title: title,
                 description: description,
-                creator_id: creator_id,
+                creator_id: request.user.id,
                 type_id: type_id,
                 status_id: status_id,
                 assigned_user_id: assigned_user_id,
                 time_estimate: time_estimate,
-                actual_time: actual_time
+                actual_time: actual_time,
+                task_id: task_id
             }).then((task) => {
                 return response.status(200).json(task);
             }).catch(e => {
-                console.log(e);
                 return response.status(400).json({message: 'invalid data'});
             })
         }).catch(err => {
@@ -116,7 +108,6 @@ function createStatus(request, response) {
     TaskStatus.create({name}).then(() => {
         return response.json({success: true, message: 'Task Status created successfully'});
     }).catch(e => {
-        console.log(e);
         return response.json({success: false, message: 'Task Status creation failed'});
     })
 }
@@ -130,7 +121,6 @@ function createType(request, response) {
     TaskType.create({name}).then(() => {
         return response.json({success: true, message: 'Task Type created successfully'});
     }).catch(e => {
-        console.log(e);
         return response.json({success: false, message: 'Task Type creation failed'});
     })
 }

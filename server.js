@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const routes = require('./routes')
+const path = require('path');
+
 
 const PORT = 4000;
 app.use(cors());
@@ -17,8 +19,6 @@ app.use(
 app.use(bodyParser.json());
 app.use(passport.initialize());
 require('./config/passport')(passport);
-// app.use(passport.initialize());
-// require('./config/passport')(passport);
 const record = {
     username: 'belal',
     email: 'test@hotmail',
@@ -26,6 +26,11 @@ const record = {
 
 }
 routes.init(app);
+app.use(express.static(path.join(__dirname, 'client')));
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
+})
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
