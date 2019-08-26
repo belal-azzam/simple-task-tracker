@@ -1,6 +1,6 @@
 # simple-task-tracker
 simple task tracker application build with node react and mysql.
-you can organize your tasks using drag and drop to set its status using react-beautiful-dnd
+you can organize your tasks using drag and drop to set its status using react-beautiful-dnd and also contains authentication for the tasks users.
 
 steps to use this project:
 1. clone this repo
